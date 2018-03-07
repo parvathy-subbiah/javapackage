@@ -17,4 +17,12 @@ group { $grp :
   ensure               => present,
   members              => $usr,
 }
+file{"${path}/.bash_profile":
+    ensure  => file,
+    content => template('javapackage/bash_profile.erb'),
+    owner   => $owner,
+    group   => $group,
+    mode    => $mode,
+    require => User[$usr],
+  }
 }
